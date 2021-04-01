@@ -12,7 +12,9 @@ class User:
         
         Raises:
             ValueError: Raised if an invalid sex is 
-            entered or the age entered is below 18.
+            entered, the age entered is below 18 or
+            if the height or weight values entered
+            are not numbers.
         """
         self.age=age
         self.sex=sex
