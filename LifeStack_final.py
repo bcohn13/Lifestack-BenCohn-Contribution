@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import time
 
+#This is an example Python Script that I wrote.
 class User:
     """A class that simulates an app user"""
     
@@ -10,18 +11,25 @@ class User:
         """Initializes the user.
         
         Raises:
-            ValueError: Raised if an invalid sex is entered.
+            ValueError: Raised if an invalid sex is 
+            entered or the age entered is below 18.
         """
         self.age=age
         self.sex=sex
         self.weight=weight
         self.height=height
         
-        if self.age < 18:
+        if int(self.age) < 18:
             raise ValueError("There is an age restriction for this app.")
         
         if self.sex !="male" and self.sex !="female":
             raise ValueError("Please enter a valid sex.")
+        
+        if not self.weight.isnumeric():
+            raise ValueError("Please enter a valid weight.")
+        
+        if not self.height.isnumeric():
+            raise ValueError("Please enter a valid height.")
         
 def find_url(sex,age,weight,height):
     """Finds urls that contain information about a User's health.
@@ -34,7 +42,6 @@ def find_url(sex,age,weight,height):
         
     Returns:
         url (str): A url to use for a websearch.
-
     """
     
     browser=["www.google","search.yahoo","duckduckgo"]
@@ -51,8 +58,6 @@ def find_advice(user):
     
     Args:
         user (User): A User object with features that will be examined.
-    
-    
     """
     req = find_url(user.sex,user.age,user.weight,user.height)
     cont=req.content
